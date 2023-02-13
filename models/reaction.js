@@ -5,6 +5,7 @@ const moment = require('moment');
 
 
 
+
 // Creates the reaction schema NOT A MODEL 
 
 const reactionSchema = new Schema(
@@ -27,9 +28,10 @@ const reactionSchema = new Schema(
         },
 
         createdAt: {
-            type: String,
-            default: Date.now,
-            get: timeStamp => moment(timeStamp).format("MMM DD, YYYY [at] hh:mm a"),
+            type: Date,
+            default: Date.now(),
+            get: timestamp => moment(timestamp).format("MMM DD, YYYY [at] hh:mm a"),
+            
         },
     },
     {

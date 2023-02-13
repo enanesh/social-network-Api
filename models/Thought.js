@@ -1,8 +1,5 @@
 const { Schema, model, Types } = require("mongoose");
-
-//imports moment module
-const moment = require('moment');
-
+const reactionSchema = require("./reaction");
 
 
 //Creates the model "Thought"
@@ -17,8 +14,8 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            get: createdAt => moment(createdAt).format("MMM DD, YYYY [at] hh:mm a"),
+            default: Date.now(),
+            get: timeStamp => moment(timeStamp).format("MMM DD, YYYY [at] hh:mm a"),
         },
 
         username: {
@@ -32,6 +29,9 @@ const thoughtSchema = new Schema(
         
     },
     {
+
+        timestamps: true,
+        
         toJSON: {
             virtuals: true,
             getters: true,
@@ -45,39 +45,6 @@ const thoughtSchema = new Schema(
 
 
 
-// Creates the reaction schema NOT A MODEL 
-
-const reactionSchema = new Schema(
-    {
-        reactionId: {
-            type: Schema.Types.ObjectId(),
-        },
-
-        reactionBody: {
-            type: String,
-            maxlength: 280,
-        },
-
-        username: {
-            type: String,
-            required: true,
-
-        },
-
-        createdAt: {
-            type: String,
-            default: Date.now,
-            get: createdAt => moment(createdAt).format("MMM DD, YYYY [at] hh:mm a"),
-        },
-    },
-    {
-        toJSON: {
-            virtuals: true,
-            getters: true
-        },
-        id: false,
-    }
-);
 
 
 

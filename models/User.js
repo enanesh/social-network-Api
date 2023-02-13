@@ -21,7 +21,7 @@ const userSchema = new Schema(
                 message: (props) => `${props.value} is not in correct format !!`,
             },
         },
-        toughts: [
+        thoughts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Thought",
@@ -35,11 +35,14 @@ const userSchema = new Schema(
             },
         ],
 
+        
+        
+    },
+    {
         toJSON: {
             virtuals: true,
         },
         id: false,
-        
     }
 );
 

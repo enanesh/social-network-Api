@@ -1,37 +1,27 @@
-const { Schema, Types} = require('mongoose')
+const { Schema, Types } = require('mongoose');
+// import moment module to format the timestamp 
+const moment = require('moment')
 
-//imports moment module
-const moment = require('moment');
-
-
-
-
-// Creates the reaction schema NOT A MODEL 
-
+//reaction schema
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-
-            default: () => new Types.ObjectId()
+            default: () => new Types.ObjectId(),
         },
-
         reactionBody: {
             type: String,
-            maxlength: 280,
+            required: true,
+            maxlength: 280
         },
-
         username: {
             type: String,
             required: true,
-
         },
-
         createdAt: {
             type: Date,
-            default: Date.now(),
-            get: timestamp => moment(timestamp).format("MMM DD, YYYY [at] hh:mm a"),
-            
+            default: Date.now,
+            get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
         },
     },
     {
@@ -41,6 +31,6 @@ const reactionSchema = new Schema(
         },
         id: false,
     }
-);
+)
 
 module.exports = reactionSchema;

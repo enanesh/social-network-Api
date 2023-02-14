@@ -1,9 +1,11 @@
-const { Schema, model, Types } = require("mongoose");
-const reactionSchema = require("./reaction");
+const { Schema, model, Types } = require('mongoose');
+const reactionSchema = require('../models/reaction');
+// import moment module to format the timestamp 
+const moment = require('moment');
 
 
-//Creates the model "Thought"
 
+// thought schema
 const thoughtSchema = new Schema(
     {
         thoughtText: {
@@ -15,36 +17,22 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+            // get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
         },
-
         username: {
             type: String,
             required: true,
-            
         },
-        reactions: [
-            reactionSchema
-        ],
-        
+        reactions: [reactionSchema],
     },
     {
-
-        timestamps: true,
-        
         toJSON: {
             virtuals: true,
             getters: true,
         },
         id: false,
-        
-       
-
     }
-);
-
-
-
+)
 
 
 

@@ -1,11 +1,11 @@
 const { User, Thought, reactionSchema } = require("../models");
 
-module.expots = {
+module.exports = {
     
-        //Get All thoughts (GET)
+    //Get All thoughts (GET)
     
     getThoughts(req, res) {
-        Thought.find()
+        Thought.find({})
             .then((thought) => res.json(thought))
             .catch((err) => res.status(500).json(err));
     },
@@ -66,7 +66,7 @@ module.expots = {
     deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thought) =>
-                !thought 
+                !thought
                     ? res.status(404).json({ message: 'No thought  with that ID' })
                     : User.deleteOne({ _id: { $in: thought.User } })
             )
@@ -110,4 +110,4 @@ module.expots = {
     },
 
 
-}
+};

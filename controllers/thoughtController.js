@@ -30,7 +30,7 @@ module.expots = {
         Thought.create(req.body)
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    //syntax to append a Value to an Array (MONGODB) I found an example on Stack overflow of how to do it using Mongoose 
+                    //syntax to append a Value to an Array (MONGODB) I found an example on Stack-overflow of how to do it using Mongoose 
                     
                     { _id: req.body.userId },
                     { $push: { thoughts: _id } },
@@ -44,5 +44,35 @@ module.expots = {
                 return res.status(500).json(err);
             });
     },
+
+    //Update a thought by ID (PUT)
+
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No thought with this id!' })
+                    : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+
+    // Delete a thought 
+
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+            .then((thought) =>
+                !thought 
+                    ? res.status(404).json({ message: 'No thought  with that ID' })
+                    : User.deleteOne({ _id: { $in: thought.User } })
+            )
+            .then(() => res.json({ message: 'Thought deleted!' }))
+            .catch((err) => res.status(500).json(err));
+    },
+
  
 }

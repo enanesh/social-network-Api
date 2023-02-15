@@ -23,9 +23,9 @@ module.exports = {
             //removes empty objects
             .lean()
             .then(async (user) =>
-                !  user
+                !user
                     ? res.status(404).json({ message: 'No user with that ID' })
-                    : res.json( user )
+                    : res.json(user)
             )
             .catch((err) => {
                 console.log(err);
@@ -73,7 +73,7 @@ module.exports = {
 
 
 
-        //**BONUS */
+    //**BONUS */
     
     //Remove a Users  associated thoughts when deleted.
     
@@ -81,11 +81,9 @@ module.exports = {
     //Adds new friend to a user's friends list (POST)
 
     addNewFriend(req, res) {
-        console.log('You are adding a new friend');
-        console.log(req.body);
         User.findOneAndUpdate(
-            { _id: req.params.friendId },
-            { $addToSet: { friends: req.body } },
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.body.friendId } },
             { runValidators: true, new: true }
         )
             .then((user) =>
@@ -102,7 +100,7 @@ module.exports = {
     // Remove a friend from user's friend list (DELETE)
 
     removeFriend(req, res) {
-       User.findOneAndUpdate(
+        User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: { assignment: { assignmentId: req.params.friendsId } } },
             { runValidators: true, new: true }
@@ -121,4 +119,4 @@ module.exports = {
 
 
 
-}    
+};   

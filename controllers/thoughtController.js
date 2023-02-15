@@ -61,7 +61,7 @@ module.expots = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // Delete a thought 
+    // Delete a thought (DELETE)
 
     deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
@@ -74,5 +74,40 @@ module.expots = {
             .catch((err) => res.status(500).json(err));
     },
 
- 
+    //create a reaction stored in a single thought's reactions array field (POST)
+
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            // addToSet operator adds a value to an array unless the value is already present. 
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true }
+        )
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: "No thought find with Id!" })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+
+
+    //delete to pull and remove a reaction by the reaction's ID (DELETE)
+
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            //	pul Removes all array elements that match a specified query
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { runValidators: true, new: true }
+        )
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: "No thought find with this Id!" })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+
+
 }

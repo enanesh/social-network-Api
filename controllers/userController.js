@@ -59,6 +59,20 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    // Remove remove user by its id (DELETE)
+    deleteUserById(req, res) {
+        User.findOneAndDelete({ _id: req.params.userId })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No course with that ID' })
+                    : user.deleteOne({ _id: { $in: user } })
+            )
+            .then(() => res.json({ message: 'User deleted!' }))
+            .catch((err) => res.status(500).json(err));
+    },
+
+
+
         //**BONUS */
     
     //Remove a Users  associated thoughts when deleted.

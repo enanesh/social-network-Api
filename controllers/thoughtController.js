@@ -97,7 +97,7 @@ module.expots = {
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            //	pul Removes all array elements that match a specified query
+            //	pull Removes all array elements that match a specified query
             { $pull: { reactions: { reactionId: req.params.reactionId } } },
             { runValidators: true, new: true }
         )

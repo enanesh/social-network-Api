@@ -38,6 +38,11 @@ module.exports = {
                     
                 );
             })
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: "No User find with this ID!" })
+                    : res.json(thought)
+            )
                 
             .catch((err) => {
                 console.log(err);

@@ -1,8 +1,6 @@
 const { Schema, Types } = require('mongoose');
-// import moment module to format the timestamp 
-const moment = require('moment')
 
-//reaction schema
+
 const reactionSchema = new Schema(
     {
         reactionId: {
@@ -12,6 +10,7 @@ const reactionSchema = new Schema(
         reactionBody: {
             type: String,
             required: true,
+            minLength: 1,
             maxlength: 280
         },
         username: {
@@ -20,8 +19,8 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+            default: Date.now(),
+           
         },
     },
     {
@@ -31,6 +30,6 @@ const reactionSchema = new Schema(
         },
         id: false,
     }
-)
+);
 
 module.exports = reactionSchema;

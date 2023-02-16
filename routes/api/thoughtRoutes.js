@@ -18,6 +18,7 @@ const {
 
 router.route('/').get(getThoughts).post(createThought);
 
+;
 
 // /api/thought/:thoughtId
 

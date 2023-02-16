@@ -72,14 +72,13 @@ module.exports = {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought  with that ID' })
+                    ? res.status().json({ message: 'No thought  with that ID' })
                     : User.deleteOne({ _id: { $in: thought.User } })
             )
             .then(() => res.json({ message: 'Thought deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
 
-    
     //create a reaction stored in a single thought's reactions array field (POST)
 
     createReaction(req, res) {
@@ -98,7 +97,7 @@ module.exports = {
     },
 
 
-    //delete to pull and remove a reaction by the reaction's ID (DELETE)
+    //delete to pull and remove a reaction by the reaction's ID (DELETE) ..FIX IS NOT WORKING !
 
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(

@@ -1,5 +1,6 @@
 const { Schema, Types } = require('mongoose');
-const moment = require('moment');
+const thoughtSchema = require("./Thought");
+const moment = require('moment');//Sets the timestamp 
 
 const reactionSchema = new Schema(
     {
@@ -20,7 +21,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+            get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')//timestamp format
            
         },
     },
@@ -32,5 +33,7 @@ const reactionSchema = new Schema(
         id: false,
     }
 );
+
+
 
 module.exports = reactionSchema;

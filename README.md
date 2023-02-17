@@ -95,21 +95,21 @@ This REST API calls are tested used Insomnia .Please follow the VIDEO DEMO to se
 
 📁 USER
 
-- Create a new user: POST /api/users
+- Create a new user: POST /api/user
 
-- Get all users: GET /api/users
+- Get all users: GET /api/user
 
 - Get a single user by its id: GET /api/user/:userId
 
 - Update a user by its id: PUT /api/user/:userId
 
-- Delete a user by its id: DELETE /api/use/:userId
+- Delete a user by its id: DELETE /api/user/:userId
 
 
 📁 FRIEND
 
-- Add a new friend to a user's friend list: POST /api/users/:userid/friends/:friendId
-- Delete a friend from a user's friend list: DELETE /api/users/:userid/friends/:friendId
+- Add a new friend to a user's friend list: POST /api/user/:userid/friends/:friendId
+- Delete a friend from a user's friend list: DELETE /api/user/:userid/friends/:friendId
 
 📁 THOUGHT
 

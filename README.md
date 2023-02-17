@@ -54,6 +54,8 @@ git clone https://github.com/enanesh/social-network-api
 git status 
 ```
 
+Then install mongoDB 
+
 ### Step 2:
 
 In the terminal run the command `npm init`
@@ -62,6 +64,8 @@ In the terminal run the command `npm init`
 
 To install the node libraries run this commands:
 ```sh
+npm install express
+npm install mongoose --save
 npm install moment --save   
 
 ```
@@ -70,11 +74,7 @@ npm install moment --save
 
 ### Step 4:
 
-Once the app ipon and all the libraries are installed 
-
-### Step 5:
-
-### Step 6:
+Once all the libraries are installed before running the `server.js` you'll need to seed the database in order to do so go to `utils/seed.js`once you run the seed.js this is going to create two documents on the user and Thought collections.
 
 
 
@@ -87,6 +87,43 @@ Once the app ipon and all the libraries are installed
 https://user-images.githubusercontent.com/111031708/219521299-09b82e03-a51c-4a80-97e1-78991988a9a8.mp4
 
 
+
+
+## Test
+
+This REST API calls are tested used Insomnia .Please follow the VIDEO DEMO to see what data is needed to test. Below you're going to find how the routes where set. 
+
+📁 USER
+
+- Create a new user: POST /api/users
+
+- Get all users: GET /api/users
+
+- Get a single user by its id: GET /api/user/:userId
+
+- Update a user by its id: PUT /api/user/:userId
+
+- Delete a user by its id: DELETE /api/use/:userId
+
+
+📁 FRIEND
+
+- Add a new friend to a user's friend list: POST /api/users/:userid/friends/:friendId
+- Delete a friend from a user's friend list: DELETE /api/users/:userid/friends/:friendId
+
+📁 THOUGHT
+
+- Create a new thought: POST /api/thought/
+- Get all thoughts: GET /api/thought/
+- Get a single thought by its id: GET /api/thought/:thoughtId
+- Update a thought by its id: PUT /api/thought/:thoughtId
+- Delete a thought by its id: DELETE /api/thought/:thoughtId
+
+
+📁 REACTION
+
+- Create a reaction: POST /api/thought/:thoughtId/reactions
+- Delete a reaction by the reactionId: DEL /api/thought/:thoughtId/reactions/:reactionId
 
 
 
@@ -114,3 +151,5 @@ https://user-images.githubusercontent.com/111031708/219521299-09b82e03-a51c-4a80
 
 
 ## License
+
+MIT License
